@@ -35,14 +35,18 @@ func _on_body_exited(body):
 			enemy_unit_count -= 1
 		elif body_team == Team.TeamName.PLAYER:
 			player_unit_count -= 1
-
+		
+		check_whether_base_can_be_captured()
+		
 
 func check_whether_base_can_be_captured():
 	var majority_team = get_team_with_majority()
-	
-	if majority_team == Team.TeamName.NEUTRAL: return
-	
-	if majority_team == team.team:
+
+	if majority_team == Team.TeamName.NEUTRAL:
+		print("Teams evened out, stopping capture clock")
+		team_to_capture = Team.TeamName.NEUTRAL
+		capture_timer.stop()
+	elif majority_team == team.team:
 		print("Owning team regained majority, stopping capture clock")
 		team_to_capture = Team.TeamName.NEUTRAL
 		capture_timer.stop()
