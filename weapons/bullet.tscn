@@ -1,20 +1,20 @@
 [gd_scene load_steps=4 format=3 uid="uid://bf27umi31fi3g"]
 
-[ext_resource type="Texture2D" uid="uid://c8t150angcs0b" path="res://assets/kenney_topdowntanksredux/Spritesheet/onlyObjects_default.png" id="1_p118v"]
-[ext_resource type="Script" path="res://bullet.gd" id="1_tepbx"]
+[ext_resource type="Script" path="res://weapons/bullet.gd" id="1_0apdh"]
+[ext_resource type="Texture2D" uid="uid://c8t150angcs0b" path="res://assets/kenney_topdowntanksredux/Spritesheet/onlyObjects_default.png" id="2_1pey7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tw860"]
 size = Vector2(6, 12)
 
 [node name="Bullet" type="Area2D"]
 rotation = 1.5708
-script = ExtResource("1_tepbx")
+script = ExtResource("1_0apdh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_tw860")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_p118v")
+texture = ExtResource("2_1pey7")
 region_enabled = true
 region_rect = Rect2(198, 46, 4, 10)
 
@@ -28,4 +28,5 @@ offset_top = 5.0
 offset_right = 4.0
 offset_bottom = 7.0
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
