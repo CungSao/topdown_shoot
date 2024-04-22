@@ -2,9 +2,14 @@ class_name Player extends CharacterBody2D
 
 @export var speed = 100
 
+@onready var team = $Team
 @onready var health_stat = $Health
-@onready var weapon = $Weapon
+@onready var weapon:Weapon = $Weapon
 
+
+func _ready():
+	weapon.initialize(team.team)
+	
 
 func _physics_process(_delta):
 	var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
@@ -15,6 +20,10 @@ func _physics_process(_delta):
 	
 	if Input.is_action_pressed("shoot"):
 		weapon.shoot()
+
+
+func get_team() -> int:
+	return team.team
 
 
 func handle_hit():

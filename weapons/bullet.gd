@@ -2,6 +2,7 @@ class_name Bullet extends Area2D
 
 @export var speed = 300
 var direction:Vector2
+var team:int = -1
 
 
 func _physics_process(delta):
@@ -22,5 +23,6 @@ func _on_timer_timeout():
 
 func _on_body_entered(body):
 	if body.has_method("handle_hit"):
-		body.handle_hit()
+		if body.has_method("get_team") and body.get_team() != team:
+			body.handle_hit()
 		queue_free()

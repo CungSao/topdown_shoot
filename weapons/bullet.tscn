@@ -18,7 +18,7 @@ texture = ExtResource("2_1pey7")
 region_enabled = true
 region_rect = Rect2(198, 46, 4, 10)
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Kill_Timer" type="Timer" parent="."]
 wait_time = 4.0
 autostart = true
 
@@ -29,4 +29,4 @@ offset_right = 4.0
 offset_bottom = 7.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Kill_Timer" to="." method="_on_timer_timeout"]
