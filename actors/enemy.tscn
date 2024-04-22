@@ -2,47 +2,17 @@
 
 [ext_resource type="Script" path="res://actors/enemy.gd" id="1_4ntur"]
 [ext_resource type="Texture2D" uid="uid://brewpv151c6np" path="res://assets/topdown-shooter/Spritesheet/spritesheet_characters.png" id="3_i76ia"]
+[ext_resource type="PackedScene" uid="uid://kie8nwsap7lf" path="res://weapons/weapon.tscn" id="3_klxux"]
 [ext_resource type="Script" path="res://health.gd" id="4_0bq6d"]
-[ext_resource type="Texture2D" uid="uid://c8t150angcs0b" path="res://assets/kenney_topdowntanksredux/Spritesheet/onlyObjects_default.png" id="4_7tpkq"]
+[ext_resource type="Script" path="res://actors/AI.gd" id="5_gdfd5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_57vff"]
 size = Vector2(42, 42)
 
-[sub_resource type="Animation" id="Animation_a3vrx"]
-resource_name = "muzzle_flash"
-length = 0.05
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MuzzleFlash:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MuzzleFlash:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.5, 1.2)]
-}
+[sub_resource type="CircleShape2D" id="CircleShape2D_3p82f"]
+radius = 189.0
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6da5t"]
-_data = {
-"muzzle_flash": SubResource("Animation_a3vrx")
-}
-
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_4ntur")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -54,29 +24,17 @@ region_rect = Rect2(0, 88, 56, 44)
 position = Vector2(-6, 0)
 shape = SubResource("RectangleShape2D_57vff")
 
-[node name="spawn_bullet" type="Marker2D" parent="."]
-position = Vector2(33, 9)
-
-[node name="gun_direction" type="Marker2D" parent="."]
-position = Vector2(34, 9)
-
-[node name="AttackCooldown" type="Timer" parent="."]
-wait_time = 0.7
-one_shot = true
-
-[node name="MuzzleFlash" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(44, 9)
-rotation = -1.5708
-scale = Vector2(0.5, 1.2)
-texture = ExtResource("4_7tpkq")
-region_enabled = true
-region_rect = Rect2(324, 334, 20, 25)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_6da5t")
-}
+[node name="Weapon" parent="." instance=ExtResource("3_klxux")]
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_0bq6d")
+
+[node name="AI" type="Node" parent="."]
+script = ExtResource("5_gdfd5")
+
+[node name="PlayerDetectionZone" type="Area2D" parent="AI"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AI/PlayerDetectionZone"]
+shape = SubResource("CircleShape2D_3p82f")
+
+[connection signal="body_entered" from="AI/PlayerDetectionZone" to="AI" method="_on_player_detection_zone_body_entered"]

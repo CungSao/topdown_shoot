@@ -1,19 +1,12 @@
 class_name Player extends CharacterBody2D
 
-signal player_fired_bullet(bullet, position, direction)
-
 @export var speed = 100
 
 @onready var health_stat = $Health
 @onready var weapon = $Weapon
 
 
-func _ready():
-	weapon.connect("weapon_fired", shoot)
-
-
-
-func _physics_process(delta):
+func _physics_process(_delta):
 	var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	velocity = input_direction.normalized() * speed
 	move_and_slide()
@@ -22,10 +15,6 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed("shoot"):
 		weapon.shoot()
-
-
-func shoot(p_bullet, location:Vector2, direction:Vector2):
-	player_fired_bullet.emit(p_bullet, location, direction)
 
 
 func handle_hit():
