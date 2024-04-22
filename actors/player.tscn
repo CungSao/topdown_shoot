@@ -13,9 +13,10 @@ size = Vector2(42, 42)
 script = ExtResource("1_53fsj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-8, 0)
 texture = ExtResource("3_kunr3")
 region_enabled = true
-region_rect = Rect2(0, 0, 56, 44)
+region_rect = Rect2(348, 0, 40, 44)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-6, 0)
@@ -25,5 +26,6 @@ shape = SubResource("RectangleShape2D_57vff")
 script = ExtResource("5_8rmri")
 
 [node name="Weapon" parent="." instance=ExtResource("4_r8xi8")]
+position = Vector2(16, 9)
 
 [node name="Team" parent="." instance=ExtResource("5_v4t4o")]

@@ -24,7 +24,8 @@ var actor_velocity:Vector2
 
 func _ready():
 	set_state(State.PATROL)
-	
+
+
 func _physics_process(_delta):
 	match current_state:
 		State.PATROL:
@@ -53,6 +54,8 @@ func initialize(_actor, _weapon:Weapon, _team:int):
 	weapon = _weapon
 	team = _team
 
+	weapon.weapon_out_of_ammo.connect(handle_reload)
+
 
 func set_state(new_state):
 	if new_state == current_state: return
@@ -64,6 +67,10 @@ func set_state(new_state):
 		
 	current_state = new_state
 	state_changed.emit(current_state)
+
+
+func handle_reload():
+	weapon.start_reload()
 
 
 func _on_patrol_timer_timeout():

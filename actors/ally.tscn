@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://dimmqho2n8d28"]
+[gd_scene load_steps=9 format=3 uid="uid://blnrm1xuxawoe"]
 
-[ext_resource type="Script" path="res://actors/enemy.gd" id="1_2rx4t"]
+[ext_resource type="Script" path="res://actors/actor.gd" id="1_2rx4t"]
 [ext_resource type="Texture2D" uid="uid://brewpv151c6np" path="res://assets/topdown-shooter/Spritesheet/spritesheet_characters.png" id="2_m4tnf"]
 [ext_resource type="PackedScene" uid="uid://kie8nwsap7lf" path="res://weapons/weapon.tscn" id="3_eblys"]
 [ext_resource type="Script" path="res://actors/health.gd" id="4_yrgqj"]
@@ -13,10 +13,11 @@ size = Vector2(42, 42)
 [sub_resource type="CircleShape2D" id="CircleShape2D_3p82f"]
 radius = 189.0
 
-[node name="Ally" type="CharacterBody2D" groups=["enemy"]]
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_2rx4t")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-9, 0)
 texture = ExtResource("2_m4tnf")
 region_enabled = true
 region_rect = Rect2(350, 0, 38, 44)
@@ -26,12 +27,12 @@ position = Vector2(-6, 0)
 shape = SubResource("RectangleShape2D_57vff")
 
 [node name="Weapon" parent="." instance=ExtResource("3_eblys")]
+position = Vector2(15, 9)
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_yrgqj")
 
 [node name="AI" type="Node2D" parent="."]
-visible = false
 script = ExtResource("5_tip43")
 
 [node name="DetectionZone" type="Area2D" parent="AI"]
