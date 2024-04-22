@@ -1,51 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://blnrm1xuxawoe"]
+[gd_scene load_steps=2 format=3 uid="uid://dswnfh7p0ei1c"]
 
-[ext_resource type="Script" path="res://actors/actor.gd" id="1_2rx4t"]
-[ext_resource type="Texture2D" uid="uid://brewpv151c6np" path="res://assets/topdown-shooter/Spritesheet/spritesheet_characters.png" id="2_m4tnf"]
-[ext_resource type="PackedScene" uid="uid://kie8nwsap7lf" path="res://weapons/weapon.tscn" id="3_eblys"]
-[ext_resource type="Script" path="res://actors/health.gd" id="4_yrgqj"]
-[ext_resource type="Script" path="res://actors/AI.gd" id="5_tip43"]
-[ext_resource type="PackedScene" uid="uid://c17tnmjq7c15m" path="res://actors/team.tscn" id="6_43gch"]
+[ext_resource type="PackedScene" uid="uid://dj03726dpg1wt" path="res://actors/enemy.tscn" id="1_5q8w7"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_57vff"]
-size = Vector2(42, 42)
+[node name="Ally" instance=ExtResource("1_5q8w7")]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3p82f"]
-radius = 189.0
+[node name="Sprite2D" parent="." index="0"]
+region_rect = Rect2(348, 0, 40, 44)
 
-[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
-script = ExtResource("1_2rx4t")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-9, 0)
-texture = ExtResource("2_m4tnf")
-region_enabled = true
-region_rect = Rect2(350, 0, 38, 44)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-6, 0)
-shape = SubResource("RectangleShape2D_57vff")
-
-[node name="Weapon" parent="." instance=ExtResource("3_eblys")]
-position = Vector2(15, 9)
-
-[node name="Health" type="Node" parent="."]
-script = ExtResource("4_yrgqj")
-
-[node name="AI" type="Node2D" parent="."]
-script = ExtResource("5_tip43")
-
-[node name="DetectionZone" type="Area2D" parent="AI"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AI/DetectionZone"]
-shape = SubResource("CircleShape2D_3p82f")
-
-[node name="PatrolTimer" type="Timer" parent="AI"]
-wait_time = 3.0
-one_shot = true
-
-[node name="Team" parent="." instance=ExtResource("6_43gch")]
-
-[connection signal="body_entered" from="AI/DetectionZone" to="AI" method="_on_detection_zone_body_entered"]
-[connection signal="body_exited" from="AI/DetectionZone" to="AI" method="_on_detection_zone_body_exited"]
-[connection signal="timeout" from="AI/PatrolTimer" to="AI" method="_on_patrol_timer_timeout"]
+[node name="Team" parent="." index="5"]
+team = 1

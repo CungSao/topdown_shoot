@@ -29,3 +29,4 @@ script = ExtResource("5_8rmri")
 position = Vector2(16, 9)
 
 [node name="Team" parent="." instance=ExtResource("5_v4t4o")]
+team = 1

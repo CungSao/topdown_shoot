@@ -33,6 +33,7 @@ position = Vector2(15, 9)
 script = ExtResource("4_0bq6d")
 
 [node name="AI" type="Node2D" parent="."]
+visible = false
 script = ExtResource("5_gdfd5")
 
 [node name="DetectionZone" type="Area2D" parent="AI"]
@@ -45,7 +46,7 @@ wait_time = 3.0
 one_shot = true
 
 [node name="Team" parent="." instance=ExtResource("6_1uju6")]
-team = 1
+team = 2
 
 [connection signal="body_entered" from="AI/DetectionZone" to="AI" method="_on_detection_zone_body_entered"]
 [connection signal="body_exited" from="AI/DetectionZone" to="AI" method="_on_detection_zone_body_exited"]
