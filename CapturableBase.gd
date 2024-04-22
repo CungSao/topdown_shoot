@@ -1,4 +1,4 @@
-extends Area2D
+class_name CapturableBase extends Area2D
 
 signal base_captured(new_team)
 

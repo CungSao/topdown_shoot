@@ -5,3 +5,4 @@ func handle_bullet_spawned(bullet:Bullet, team:int, position:Vector2, direction:
 	bullet.team = team
 	bullet.global_position = position
 	bullet.set_direction(direction)
+

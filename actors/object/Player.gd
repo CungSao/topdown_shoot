@@ -1,6 +1,8 @@
 class_name Player extends CharacterBody2D
 
-@export var speed = 100
+@export var default_speed = 100
+var run_speed = default_speed * 2
+var speed = default_speed
 
 @onready var team = $Team
 @onready var health_stat = $Health
@@ -13,6 +15,9 @@ func _ready():
 
 func _physics_process(_delta):
 	var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	
+	speed = run_speed if Input.is_action_pressed("run") else default_speed
+	
 	velocity = input_direction.normalized() * speed
 	move_and_slide()
 	

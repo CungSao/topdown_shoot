@@ -2,13 +2,12 @@
 
 [ext_resource type="Script" path="res://CapturableBase.gd" id="1_ylwae"]
 [ext_resource type="Texture2D" uid="uid://crc1cnr45eguj" path="res://assets/topdown-shooter/Tilesheet/tilesheet_complete.png" id="2_yuxtk"]
-[ext_resource type="PackedScene" uid="uid://c17tnmjq7c15m" path="res://actors/team.tscn" id="3_rrmct"]
+[ext_resource type="PackedScene" uid="uid://c17tnmjq7c15m" path="res://actors/component/team.tscn" id="3_gqm1x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_17yy7"]
 size = Vector2(240, 240)
 
 [node name="CapturableBase" type="Area2D"]
-position = Vector2(515, 435)
 script = ExtResource("1_ylwae")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -21,7 +20,7 @@ region_rect = Rect2(1484, 268, 40, 40)
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_17yy7")
 
-[node name="Team" parent="." instance=ExtResource("3_rrmct")]
+[node name="Team" parent="." instance=ExtResource("3_gqm1x")]
 
 [node name="CaptureTimer" type="Timer" parent="."]
 wait_time = 10.0

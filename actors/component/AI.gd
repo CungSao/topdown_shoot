@@ -5,12 +5,13 @@ signal state_changed(new_state)
 enum State{
 	PATROL,
 	ENGAGE,
+	ADVANCE,
 }
 
 @onready var patrol_timer = $PatrolTimer
 
 var current_state:int = -1 : set = set_state
-var actor:CharacterBody2D = null
+var actor:Actor = null
 var target:CharacterBody2D = null
 var weapon:Weapon = null
 var team:int = -1
@@ -21,6 +22,8 @@ var patrol_location:Vector2
 var patrol_location_reached = false
 var actor_velocity:Vector2
 
+# ADVANCE STATE
+var next_base:Vector2
 
 func _ready():
 	set_state(State.PATROL)
@@ -30,10 +33,11 @@ func _physics_process(_delta):
 	match current_state:
 		State.PATROL:
 			if !patrol_location_reached:
+				actor_velocity = actor.velocity_toward(patrol_location)
 				actor.velocity = actor_velocity
-				actor.rotate_toward(patrol_location)
 				actor.move_and_slide()
-				if actor.global_position.distance_to(patrol_location) < 5:
+				actor.rotate_toward(patrol_location)
+				if actor.has_reached_position(patrol_location):
 					patrol_location_reached = true
 					actor_velocity = Vector2.ZERO
 					patrol_timer.start()
@@ -45,6 +49,14 @@ func _physics_process(_delta):
 					weapon.shoot()
 			else:
 				print("In the engage state but no weapon/target")
+		State.ADVANCE:
+			if actor.has_reached_position(next_base):
+				set_state(State.PATROL)
+			else:
+				actor_velocity = actor.velocity_toward(next_base)
+				actor.velocity = actor_velocity
+				actor.move_and_slide()
+				actor.rotate_toward(next_base)
 		_:
 			print("Error: found a state for our enemy that should not exist")
 
@@ -64,7 +76,11 @@ func set_state(new_state):
 		origin = global_position
 		patrol_timer.start()
 		patrol_location_reached = true
-		
+	
+	elif new_state == State.ADVANCE:
+		if actor.has_reached_position(next_base):
+			set_state(State.PATROL)
+				
 	current_state = new_state
 	state_changed.emit(current_state)
 
@@ -90,5 +106,5 @@ func _on_detection_zone_body_entered(body):
 
 func _on_detection_zone_body_exited(body):
 	if body == target:
-		set_state(State.PATROL)
+		set_state(State.ADVANCE)
 		target = null

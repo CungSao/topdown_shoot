@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dswnfh7p0ei1c"]
 
-[ext_resource type="PackedScene" uid="uid://dj03726dpg1wt" path="res://actors/enemy.tscn" id="1_5q8w7"]
+[ext_resource type="PackedScene" uid="uid://dj03726dpg1wt" path="res://actors/object/enemy.tscn" id="1_5q8w7"]
 
 [node name="Ally" instance=ExtResource("1_5q8w7")]
 

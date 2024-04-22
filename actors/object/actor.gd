@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name Actor extends CharacterBody2D
 
 @export var speed = 100
 
@@ -19,6 +19,10 @@ func rotate_toward(location:Vector2):
 
 func velocity_toward(location:Vector2) -> Vector2:
 	return global_position.direction_to(location) * speed
+
+
+func has_reached_position(location:Vector2) -> bool:
+	return global_position.distance_to(location) < 5
 
 
 func get_team() -> int:

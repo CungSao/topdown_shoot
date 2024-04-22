@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=3 uid="uid://c17hhjl10eqxm"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_2rxsg"]
+[ext_resource type="Script" path="res://globals/ui.gd" id="2_8teki"]
+[ext_resource type="PackedScene" uid="uid://bjvryepq3i7so" path="res://actors/object/player.tscn" id="3_vnidk"]
+[ext_resource type="Script" path="res://BulletManager.gd" id="4_e0e4j"]
+[ext_resource type="Script" path="res://SCapturableBase.gd" id="5_ab5g6"]
+[ext_resource type="PackedScene" uid="uid://73431pbv03bc" path="res://capturable_base.tscn" id="5_j8ak2"]
+[ext_resource type="Script" path="res://MapAI.gd" id="6_ff066"]
+[ext_resource type="PackedScene" uid="uid://dswnfh7p0ei1c" path="res://actors/object/ally.tscn" id="6_n5hfa"]
+[ext_resource type="PackedScene" uid="uid://dj03726dpg1wt" path="res://actors/object/enemy.tscn" id="7_v75y4"]
+[ext_resource type="PackedScene" uid="uid://c17tnmjq7c15m" path="res://actors/component/team.tscn" id="8_tucts"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_2rxsg")
+
+[node name="UI" type="CanvasLayer" parent="."]
+process_mode = 3
+script = ExtResource("2_8teki")
+
+[node name="Player" parent="." instance=ExtResource("3_vnidk")]
+position = Vector2(70, 340)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
+
+[node name="SBullet" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("4_e0e4j")
+
+[node name="SCapturableBase" type="Node" parent="."]
+script = ExtResource("5_ab5g6")
+
+[node name="CapturableBase" parent="SCapturableBase" instance=ExtResource("5_j8ak2")]
+position = Vector2(489, 440)
+
+[node name="CapturableBase2" parent="SCapturableBase" instance=ExtResource("5_j8ak2")]
+position = Vector2(793, 433)
+
+[node name="CapturableBase3" parent="SCapturableBase" instance=ExtResource("5_j8ak2")]
+position = Vector2(1106, 439)
+
+[node name="AllyMapAI" type="Node" parent="."]
+script = ExtResource("6_ff066")
+base_capture_start_order = 1
+
+[node name="Team" parent="AllyMapAI" instance=ExtResource("8_tucts")]
+team = 1
+
+[node name="Ally" parent="AllyMapAI" instance=ExtResource("6_n5hfa")]
+position = Vector2(274, 436)
+
+[node name="Ally2" parent="AllyMapAI" instance=ExtResource("6_n5hfa")]
+position = Vector2(58, 576)
+
+[node name="EnemyMapAI" type="Node" parent="."]
+script = ExtResource("6_ff066")
+
+[node name="Team" parent="EnemyMapAI" instance=ExtResource("8_tucts")]
+team = 2
+
+[node name="Enemy" parent="EnemyMapAI" instance=ExtResource("7_v75y4")]
+position = Vector2(1542, 323)
+rotation = -3.14159
+
+[node name="Enemy2" parent="EnemyMapAI" instance=ExtResource("7_v75y4")]
+position = Vector2(1427, 403)
+rotation = -3.14159
+
+[node name="Enemy3" parent="EnemyMapAI" instance=ExtResource("7_v75y4")]
+position = Vector2(1549, 508)
+rotation = -3.14159
