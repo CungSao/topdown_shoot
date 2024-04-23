@@ -1,5 +1,7 @@
 class_name Player extends CharacterBody2D
 
+signal died
+
 @export var default_speed = 100
 var run_speed = default_speed * 2
 var speed = default_speed
@@ -7,6 +9,7 @@ var speed = default_speed
 @onready var team = $Team
 @onready var health_stat = $Health
 @onready var weapon:Weapon = $Weapon
+@onready var camera_transform = $CameraTransform
 
 
 func _ready():
@@ -29,6 +32,10 @@ func _physics_process(_delta):
 		reload()
 
 
+func set_camera_transform(camera_path:NodePath):
+	camera_transform.remote_path = camera_path
+
+
 func reload():
 	weapon.start_reload()
 
@@ -40,3 +47,10 @@ func get_team() -> int:
 func handle_hit():
 	health_stat.health -= 20
 	print(name + ' hit! ', health_stat.health)
+	if health_stat.health <= 0:
+		die()
+
+
+func die():
+	died.emit()
+	queue_free()

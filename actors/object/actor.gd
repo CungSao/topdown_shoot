@@ -1,5 +1,7 @@
 class_name Actor extends CharacterBody2D
 
+signal died
+
 @export var speed = 100
 
 @onready var health_stat = $Health
@@ -33,4 +35,5 @@ func handle_hit():
 	health_stat.health -= 20
 	print(name + ' hit! ', health_stat.health)
 	if health_stat.health <= 0:
+		died.emit()
 		queue_free()

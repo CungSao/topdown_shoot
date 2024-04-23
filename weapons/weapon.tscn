@@ -87,7 +87,6 @@ wait_time = 0.7
 one_shot = true
 
 [node name="MuzzleFlash" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(28, 0)
 rotation = -1.5708
 texture = ExtResource("3_7w43x")

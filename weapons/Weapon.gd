@@ -32,7 +32,7 @@ func stop_reload():
 
 
 func shoot():
-	if current_ammo == 0: return
+	if current_ammo == 0 or animation_player.is_playing(): return
 	if attack_cooldown.is_stopped() and bullet != null:
 		var p_bullet = bullet.instantiate()
 		
@@ -43,6 +43,3 @@ func shoot():
 		current_ammo -= 1
 		if current_ammo == 0:
 			weapon_out_of_ammo.emit()
-
-
-
