@@ -64,8 +64,8 @@ func get_next_capturable_base():
 
 
 func assign_next_capturable_base_to_units(base:CapturableBase):
-	for unit in unit_container.get_children():
-		set_unit_ai_to_advance_to_next_base(unit)
+	for i in unit_container.get_children():
+		set_unit_ai_to_advance_to_next_base(i)
 
 
 func spawn_unit(spawn_location):
@@ -76,9 +76,9 @@ func spawn_unit(spawn_location):
 	set_unit_ai_to_advance_to_next_base(p_unit)
 
 
-func set_unit_ai_to_advance_to_next_base(unit:Actor):
+func set_unit_ai_to_advance_to_next_base(_unit:Actor):
 	if target_base:
-		var ai:AI = unit.ai
+		var ai:AI = _unit.ai
 		ai.next_base = target_base.global_position
 		ai.set_state(AI.State.ADVANCE)
 
