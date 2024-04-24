@@ -8,6 +8,7 @@ signal died
 @onready var weapon:Weapon = $Weapon
 @onready var ai:AI = $AI
 @onready var team = $Team
+var pathfinding:Pathfinding
 
 
 func _ready():

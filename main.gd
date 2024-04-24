@@ -8,6 +8,8 @@ const PLAYER = preload("res://actors/object/player.tscn")
 @onready var bullets = $SBullet
 @onready var camera_2d = $Camera2D
 @onready var gui = $GUI
+@onready var ground = $Ground
+@onready var pathfinding = $Pathfinding
 
 
 func _ready():
@@ -17,9 +19,12 @@ func _ready():
 	var ally_respawns = $AllyRespawnPoints
 	var enemy_respawns = $EnemyRespawnPoints
 	
+	pathfinding.create_navigation_map(ground)
+
 	var bases = s_capturable_base.get_capturable_bases()
-	ally_map_ai.initialize(bases, ally_respawns.get_children())
-	enemy_map_ai.initialize(bases, enemy_respawns.get_children())
+	ally_map_ai.initialize(bases, ally_respawns.get_children(), pathfinding)
+	enemy_map_ai.initialize(bases, enemy_respawns.get_children(), pathfinding)
+	
 
 	spawn_player()
 

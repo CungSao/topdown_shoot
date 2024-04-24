@@ -14,18 +14,20 @@ var target_base:CapturableBase = null
 var capturable_bases:Array
 var respawn_points:Array
 var next_spawn_to_use:int = 0
+var pathfinding:Pathfinding
 
 @onready var team = $Team
 @onready var unit_container = $UnitContainer
 @onready var respawn_timer = $RespawnTimer
 
 
-func initialize(_capturable_bases:Array, _respawn_points:Array):
+func initialize(_capturable_bases:Array, _respawn_points:Array, _pathfiding:Pathfinding):
 	if _capturable_bases.size() == 0 or _respawn_points.size() == 0 or unit == null:
 		push_error("Forgot to properly initialize our Map AI")
 		return
 
 	team.team = team_name
+	pathfinding = _pathfiding
 	
 	respawn_points = _respawn_points
 	for respawn in respawn_points:
@@ -73,13 +75,14 @@ func spawn_unit(spawn_location):
 	unit_container.add_child(p_unit)
 	p_unit.global_position = spawn_location
 	p_unit.died.connect(handle_unit_death)
+	p_unit.ai.pathfinding = pathfinding
 	set_unit_ai_to_advance_to_next_base(p_unit)
 
 
 func set_unit_ai_to_advance_to_next_base(_unit:Actor):
 	if target_base:
 		var ai:AI = _unit.ai
-		ai.next_base = target_base.global_position
+		ai.next_base = target_base.get_rand_pos_within_capture_radius()
 		ai.set_state(AI.State.ADVANCE)
 
 
@@ -89,7 +92,7 @@ func handle_unit_death():
 
 
 func _on_respawn_timer_timeout():
-	var respawn:Marker2D = respawn_points[next_spawn_to_use]
+	var respawn = respawn_points[next_spawn_to_use]
 	spawn_unit(respawn.global_position)
 	next_spawn_to_use += 1
 	if next_spawn_to_use == respawn_points.size():

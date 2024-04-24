@@ -25,6 +25,9 @@ var actor_velocity:Vector2
 # ADVANCE STATE
 var next_base:Vector2
 
+var pathfinding:Pathfinding
+
+
 func _ready():
 	set_state(State.PATROL)
 
@@ -33,11 +36,13 @@ func _physics_process(_delta):
 	match current_state:
 		State.PATROL:
 			if !patrol_location_reached:
-				actor_velocity = actor.velocity_toward(patrol_location)
-				actor.velocity = actor_velocity
-				actor.move_and_slide()
-				actor.rotate_toward(patrol_location)
-				if actor.has_reached_position(patrol_location):
+				var path = pathfinding.get_new_path(global_position, patrol_location)
+				if path.size() > 1:
+					actor_velocity = actor.velocity_toward(path[1])
+					actor.velocity = actor_velocity
+					actor.move_and_slide()
+					actor.rotate_toward(path[1])
+				else:
 					patrol_location_reached = true
 					actor_velocity = Vector2.ZERO
 					patrol_timer.start()
@@ -50,13 +55,14 @@ func _physics_process(_delta):
 			else:
 				print("In the engage state but no weapon/target")
 		State.ADVANCE:
-			if actor.has_reached_position(next_base):
-				set_state(State.PATROL)
-			else:
-				actor_velocity = actor.velocity_toward(next_base)
+			var path = pathfinding.get_new_path(global_position, next_base)
+			if path.size() > 1:
+				actor_velocity = actor.velocity_toward(path[1])
 				actor.velocity = actor_velocity
 				actor.move_and_slide()
-				actor.rotate_toward(next_base)
+				actor.rotate_toward(path[1])
+			else:
+				set_state(State.PATROL)
 		_:
 			print("Error: found a state for our enemy that should not exist")
 
@@ -90,16 +96,15 @@ func handle_reload():
 
 
 func _on_patrol_timer_timeout():
-	var patrol_range = 50
+	var patrol_range = 150
 	var rand_x = randi_range(-patrol_range, patrol_range)
 	var rand_y = randi_range(-patrol_range, patrol_range)
 	patrol_location = Vector2(rand_x, rand_y) + origin
 	patrol_location_reached = false
-	actor_velocity = actor.velocity_toward(patrol_location)
 
 
 func _on_detection_zone_body_entered(body):
-	if body.get_team() != team:
+	if body.has_method("get_team") and body.get_team() != team:
 		set_state(State.ENGAGE)
 		target = body
 

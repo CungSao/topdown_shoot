@@ -10,9 +10,20 @@ var player_unit_count:int = 0
 var enemy_unit_count:int = 0
 var team_to_capture:int = Team.TeamName.NEUTRAL
 
+@onready var coll = $CollisionShape2D
 @onready var team = $Team
 @onready var capture_timer = $CaptureTimer
 @onready var sprite_2d = $Sprite2D
+
+
+func get_rand_pos_within_capture_radius() -> Vector2:
+	var extents = coll.shape.extents
+	var top_left = coll.global_position - (extents / 2)
+	
+	var x = randf_range(top_left.x, top_left.x + extents.x)
+	var y = randf_range(top_left.y, top_left.y + extents.y)
+	
+	return Vector2(x, y)
 
 
 func _on_body_entered(body):
