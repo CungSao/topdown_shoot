@@ -7,6 +7,7 @@ const PLAYER = preload("res://actors/object/player.tscn")
 @onready var ally_map_ai = $AllyMapAI
 @onready var bullets = $SBullet
 @onready var camera_2d = $Camera2D
+@onready var gui = $GUI
 
 
 func _ready():
@@ -24,7 +25,9 @@ func _ready():
 
 
 func spawn_player():
-	var p_player = PLAYER.instantiate()
-	add_child(p_player)
-	p_player.set_camera_transform(camera_2d.get_path())
-	p_player.died.connect(spawn_player)
+	var player = PLAYER.instantiate()
+	add_child(player)
+	player.set_camera_transform(camera_2d.get_path())
+	player.died.connect(spawn_player)
+	
+	gui.set_player(player)

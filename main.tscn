@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://c17hhjl10eqxm"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_2rxsg"]
-[ext_resource type="Script" path="res://globals/ui.gd" id="2_8teki"]
+[ext_resource type="PackedScene" uid="uid://dlh3ger2c0s8j" path="res://UI/gui.tscn" id="3_r5n53"]
 [ext_resource type="Script" path="res://BulletManager.gd" id="4_e0e4j"]
 [ext_resource type="Script" path="res://SCapturableBase.gd" id="5_ab5g6"]
 [ext_resource type="PackedScene" uid="uid://73431pbv03bc" path="res://capturable_base.tscn" id="5_j8ak2"]
@@ -653,9 +653,7 @@ position = Vector2(70, 340)
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 
-[node name="UI" type="CanvasLayer" parent="."]
-process_mode = 3
-script = ExtResource("2_8teki")
+[node name="GUI" parent="." instance=ExtResource("3_r5n53")]
 
 [node name="SBullet" type="Node" parent="."]
 process_mode = 3

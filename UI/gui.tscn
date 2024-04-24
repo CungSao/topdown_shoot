@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlh3ger2c0s8j"]
+
+[ext_resource type="Script" path="res://globals/gui.gd" id="1_d4jrb"]
+[ext_resource type="Theme" uid="uid://bxin7sv3jvop6" path="res://UI/robo_36.tres" id="2_hi2v7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ycu4n"]
+bg_color = Color(0.234375, 0.234375, 0.234375, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j5y1x"]
+bg_color = Color(0.360784, 0.109804, 0.109804, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[node name="GUI" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_d4jrb")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_hi2v7")
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="Rows" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TopRow" type="HBoxContainer" parent="MarginContainer/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MiddleRow" type="HBoxContainer" parent="MarginContainer/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+
+[node name="BottomRow" type="HBoxContainer" parent="MarginContainer/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/Rows/BottomRow"]
+layout_mode = 2
+
+[node name="HealthBar" type="ProgressBar" parent="MarginContainer/Rows/BottomRow/CenterContainer"]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_ycu4n")
+theme_override_styles/fill = SubResource("StyleBoxFlat_j5y1x")
+show_percentage = false
+
+[node name="AmmoSection" type="HBoxContainer" parent="MarginContainer/Rows/BottomRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="CurrentAmmo" type="Label" parent="MarginContainer/Rows/BottomRow/AmmoSection"]
+layout_mode = 2
+text = "30"
+
+[node name="AmmoSeparator" type="Label" parent="MarginContainer/Rows/BottomRow/AmmoSection"]
+layout_mode = 2
+text = " / "
+
+[node name="MaxAmmo" type="Label" parent="MarginContainer/Rows/BottomRow/AmmoSection"]
+layout_mode = 2
+text = "30"
