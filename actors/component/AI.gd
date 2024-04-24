@@ -8,7 +8,10 @@ enum State{
 	ADVANCE,
 }
 
+@export var should_draw_path_line = false
+
 @onready var patrol_timer = $PatrolTimer
+@onready var path_line = $PathLine
 
 var current_state:int = -1 : set = set_state
 var actor:Actor = null
@@ -30,18 +33,18 @@ var pathfinding:Pathfinding
 
 func _ready():
 	set_state(State.PATROL)
+	path_line.visible = should_draw_path_line
 
 
 func _physics_process(_delta):
+	path_line.global_rotation = 0
+	
 	match current_state:
 		State.PATROL:
 			if !patrol_location_reached:
 				var path = pathfinding.get_new_path(global_position, patrol_location)
 				if path.size() > 1:
-					actor_velocity = actor.velocity_toward(path[1])
-					actor.velocity = actor_velocity
-					actor.move_and_slide()
-					actor.rotate_toward(path[1])
+					go_pos(path)
 				else:
 					patrol_location_reached = true
 					actor_velocity = Vector2.ZERO
@@ -57,14 +60,18 @@ func _physics_process(_delta):
 		State.ADVANCE:
 			var path = pathfinding.get_new_path(global_position, next_base)
 			if path.size() > 1:
-				actor_velocity = actor.velocity_toward(path[1])
-				actor.velocity = actor_velocity
-				actor.move_and_slide()
-				actor.rotate_toward(path[1])
+				go_pos(path)
 			else:
 				set_state(State.PATROL)
 		_:
 			print("Error: found a state for our enemy that should not exist")
+
+func go_pos(path:Array):
+	actor_velocity = actor.velocity_toward(path[1])
+	actor.velocity = actor_velocity
+	actor.move_and_slide()
+	actor.rotate_toward(path[1])
+	set_path_line(path)
 
 
 func initialize(_actor, _weapon:Weapon, _team:int):
@@ -73,6 +80,19 @@ func initialize(_actor, _weapon:Weapon, _team:int):
 	team = _team
 
 	weapon.weapon_out_of_ammo.connect(handle_reload)
+
+
+func set_path_line(points:Array):
+	if !should_draw_path_line: return
+	
+	var local_points = []
+	for point in points:
+		if point == points[0]:
+			local_points.append(Vector2.ZERO)
+		else:
+			local_points.append(point - global_position)
+	
+	path_line.points = local_points
 
 
 func set_state(new_state):

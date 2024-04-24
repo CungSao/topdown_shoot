@@ -4,6 +4,7 @@ signal died
 
 @export var speed = 100
 
+@onready var coll_shape = $CollisionShape2D
 @onready var health_stat = $Health
 @onready var weapon:Weapon = $Weapon
 @onready var ai:AI = $AI

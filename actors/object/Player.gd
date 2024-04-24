@@ -4,9 +4,10 @@ signal player_health_changed(new_health)
 signal died
 
 @export var default_speed = 100
-var run_speed = default_speed * 2
+var run_speed = default_speed * 10
 var speed = default_speed
 
+@onready var coll_shape = $CollisionShape2D
 @onready var team = $Team
 @onready var health_stat = $Health
 @onready var weapon:Weapon = $Weapon

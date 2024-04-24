@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://blmm8pqvlsyxx"]
+
+[ext_resource type="Script" path="res://Pathfinding.gd" id="1_13en8"]
+
+[node name="Pathfinding" type="Node"]
+script = ExtResource("1_13en8")
+enabled_color = Color(0.552941, 0.643137, 0.854902, 1)
+disabled_color = Color(0.843137, 0.501961, 0.529412, 1)
+should_display_grid = true
+
+[node name="Grid" type="Node" parent="."]
