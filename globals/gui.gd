@@ -11,17 +11,23 @@ func set_player(_player:Player):
 	player = _player
 	
 	set_new_health_value(player.health_stat.health)
-	set_current_ammo(player.weapon.current_ammo)
-	set_max_ammo(player.weapon.max_ammo)
-	
 	player.player_health_changed.connect(set_new_health_value)
-	player.weapon.ammo_changed.connect(set_current_ammo)
+	
+	set_weapon(player.weapon_manager.get_current_weapon())
+	player.weapon_manager.weapon_changed.connect(set_weapon)
 
 
 func _input(event):
 	if event.is_action_released("ui_accept"):
 		get_tree().paused = !get_tree().paused
 
+
+func set_weapon(weapon:Weapon):
+	set_current_ammo(weapon.current_ammo)
+	set_max_ammo(weapon.max_ammo)
+	if !weapon.ammo_changed.is_connected(set_current_ammo):
+		weapon.ammo_changed.connect(set_current_ammo)
+	
 
 func set_new_health_value(new_health:int):
 	var original_color = Color('#5c1c1c')

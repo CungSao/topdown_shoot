@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://kie8nwsap7lf"]
+[gd_scene load_steps=8 format=3 uid="uid://dy3lt1del3a2m"]
 
-[ext_resource type="Script" path="res://weapons/Weapon.gd" id="1_d1ami"]
-[ext_resource type="PackedScene" uid="uid://bf27umi31fi3g" path="res://weapons/bullet.tscn" id="2_iktg5"]
-[ext_resource type="Texture2D" uid="uid://bq8of5yxw3yqt" path="res://assets/topdown-shooter/PNG/weapon_silencer.png" id="3_0sdqa"]
-[ext_resource type="Texture2D" uid="uid://c8t150angcs0b" path="res://assets/kenney_topdowntanksredux/Spritesheet/onlyObjects_default.png" id="3_7w43x"]
+[ext_resource type="Script" path="res://weapons/Weapon.gd" id="1_n7i0k"]
+[ext_resource type="PackedScene" uid="uid://bf27umi31fi3g" path="res://weapons/bullet.tscn" id="2_oucay"]
+[ext_resource type="Texture2D" uid="uid://bq8of5yxw3yqt" path="res://assets/topdown-shooter/PNG/weapon_silencer.png" id="3_wecn6"]
+[ext_resource type="Texture2D" uid="uid://c8t150angcs0b" path="res://assets/kenney_topdowntanksredux/Spritesheet/onlyObjects_default.png" id="4_jkuv0"]
 
 [sub_resource type="Animation" id="Animation_a3vrx"]
 resource_name = "muzzle_flash"
@@ -12,7 +12,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Weapon/MuzzleFlash:visible")
+tracks/0/path = NodePath("Pistol/MuzzleFlash:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -24,7 +24,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Weapon/MuzzleFlash:scale")
+tracks/1/path = NodePath("Pistol/MuzzleFlash:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -39,7 +39,7 @@ resource_name = "reload"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Weapon/Sprite2D:rotation")
+tracks/0/path = NodePath("Pistol/Sprite2D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -51,7 +51,7 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Weapon")
+tracks/1/path = NodePath("Pistol")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -69,12 +69,12 @@ _data = {
 "reload": SubResource("Animation_63qjv")
 }
 
-[node name="Weapon" type="Node2D"]
-script = ExtResource("1_d1ami")
-bullet = ExtResource("2_iktg5")
+[node name="Pistol" type="Node2D"]
+script = ExtResource("1_n7i0k")
+bullet = ExtResource("2_oucay")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("3_0sdqa")
+texture = ExtResource("3_wecn6")
 
 [node name="spawn_bullet" type="Marker2D" parent="."]
 position = Vector2(16, 0)
@@ -86,7 +86,7 @@ one_shot = true
 [node name="MuzzleFlash" type="Sprite2D" parent="."]
 position = Vector2(28, 0)
 rotation = -1.5708
-texture = ExtResource("3_7w43x")
+texture = ExtResource("4_jkuv0")
 region_enabled = true
 region_rect = Rect2(324, 334, 20, 25)
 

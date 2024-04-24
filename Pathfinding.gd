@@ -1,5 +1,6 @@
 class_name Pathfinding extends Node
 
+# GRID
 @export var enabled_color:Color
 @export var disabled_color:Color
 @export var should_display_grid = false
@@ -8,6 +9,7 @@ class_name Pathfinding extends Node
 
 var grid_rects = {}
 
+# ASTAR
 var astar = AStar2D.new()
 var tilemap:TileMap
 var half_cell_size:Vector2
@@ -35,6 +37,7 @@ func add_traversable_tiles(tiles:Array):
 		var id = get_id_for_point(tile)
 		astar.add_point(id, tile)
 		
+		# Grid
 		if should_display_grid:
 			var rect = ColorRect.new()
 			grid.add_child(rect)

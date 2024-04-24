@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://bjvryepq3i7so"]
+[gd_scene load_steps=9 format=3 uid="uid://bjvryepq3i7so"]
 
 [ext_resource type="Script" path="res://actors/object/Player.gd" id="1_53fsj"]
 [ext_resource type="Texture2D" uid="uid://brewpv151c6np" path="res://assets/topdown-shooter/Spritesheet/spritesheet_characters.png" id="3_kunr3"]
-[ext_resource type="PackedScene" uid="uid://kie8nwsap7lf" path="res://weapons/weapon.tscn" id="4_r8xi8"]
+[ext_resource type="PackedScene" uid="uid://dy3lt1del3a2m" path="res://weapons/pistol.tscn" id="5_3b5o2"]
 [ext_resource type="Script" path="res://actors/component/health.gd" id="5_8rmri"]
+[ext_resource type="Script" path="res://actors/component/WeaponManager.gd" id="5_42ngm"]
 [ext_resource type="PackedScene" uid="uid://c17tnmjq7c15m" path="res://actors/component/team.tscn" id="5_srcmm"]
+[ext_resource type="PackedScene" uid="uid://gkqsc1wb0xhn" path="res://weapons/submachine_gun.tscn" id="7_ds1u4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_57vff"]
 size = Vector2(42, 42)
@@ -25,10 +27,17 @@ shape = SubResource("RectangleShape2D_57vff")
 [node name="Health" type="Node" parent="."]
 script = ExtResource("5_8rmri")
 
-[node name="Weapon" parent="." instance=ExtResource("4_r8xi8")]
-position = Vector2(16, 9)
-
 [node name="Team" parent="." instance=ExtResource("5_srcmm")]
 team = 1
 
 [node name="CameraTransform" type="RemoteTransform2D" parent="."]
+
+[node name="WeaponManager" type="Node2D" parent="."]
+position = Vector2(17, 9)
+script = ExtResource("5_42ngm")
+metadata/_edit_group_ = true
+
+[node name="Pistol" parent="WeaponManager" instance=ExtResource("5_3b5o2")]
+
+[node name="SubmachineGun" parent="WeaponManager" instance=ExtResource("7_ds1u4")]
+visible = false
