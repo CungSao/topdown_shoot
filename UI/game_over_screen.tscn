@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2fi8wdewnflo"]
+
+[ext_resource type="Script" path="res://UI/game_over_screen.gd" id="1_to67t"]
+[ext_resource type="Theme" uid="uid://bxin7sv3jvop6" path="res://UI/robo_36.tres" id="2_4uspx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1kbro"]
+bg_color = Color(0.231373, 0.231373, 0.231373, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0, 0, 0, 1)
+
+[node name="GameOverScreen" type="CanvasLayer"]
+process_mode = 2
+script = ExtResource("1_to67t")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_4uspx")
+theme_override_styles/panel = SubResource("StyleBoxFlat_1kbro")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="Rows" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 60
+
+[node name="Title" type="Label" parent="PanelContainer/MarginContainer/Rows"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/Rows"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/Rows/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Restart" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "RESTART"
+
+[node name="MainMenu" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = " MAIN MENU "
+
+[node name="Quit" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "QUIT"
+
+[connection signal="button_down" from="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer/Restart" to="." method="_on_restart_button_down"]
+[connection signal="button_down" from="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_button_down"]
+[connection signal="button_down" from="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer/Quit" to="." method="_on_quit_button_down"]

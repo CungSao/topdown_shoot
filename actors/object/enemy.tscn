@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://brewpv151c6np" path="res://assets/topdown-shooter/Spritesheet/spritesheet_characters.png" id="3_i76ia"]
 [ext_resource type="PackedScene" uid="uid://kie8nwsap7lf" path="res://weapons/weapon.tscn" id="3_klxux"]
 [ext_resource type="Script" path="res://actors/component/health.gd" id="4_mra7h"]
-[ext_resource type="PackedScene" uid="uid://bkcybt8es5cim" path="res://actors/component/ai.tscn" id="5_x3np5"]
+[ext_resource type="PackedScene" uid="uid://bkcybt8es5cim" path="res://scene_switch/ai.tscn" id="5_x3np5"]
 [ext_resource type="PackedScene" uid="uid://c17tnmjq7c15m" path="res://actors/component/team.tscn" id="6_cuhpu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_57vff"]

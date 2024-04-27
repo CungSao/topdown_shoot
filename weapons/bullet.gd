@@ -6,11 +6,10 @@ var team:int = -1
 
 
 func _physics_process(delta):
-	if direction != Vector2.ZERO:
-		var velocity = direction * speed * delta
-		
-		global_position += velocity
+	var velocity = direction * speed * delta
 	
+	global_position += velocity
+
 
 func set_direction(_direction:Vector2):
 	direction = _direction

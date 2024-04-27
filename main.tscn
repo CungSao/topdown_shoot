@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bar0vyyhnvtbe" path="res://map_ai.tscn" id="7_0xdkj"]
 [ext_resource type="PackedScene" uid="uid://dj03726dpg1wt" path="res://actors/object/enemy.tscn" id="7_v75y4"]
 [ext_resource type="Texture2D" uid="uid://crc1cnr45eguj" path="res://assets/topdown-shooter/Tilesheet/tilesheet_complete.png" id="9_dwfxr"]
-[ext_resource type="PackedScene" uid="uid://blmm8pqvlsyxx" path="res://pathfinding.tscn" id="10_0j1q2"]
+[ext_resource type="PackedScene" uid="uid://blmm8pqvlsyxx" path="res://scene_switch/pathfinding.tscn" id="10_0j1q2"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_8ljbf"]
 tile_data = PackedInt32Array(131072, 262147, 0, 196608, 327683, 0, 262144, 327683, 0, 327680, 262147, 0, 393216, 327683, 0, 458752, 327683, 0, 1, 327683, 0, 65537, 262147, 0, 131073, 262147, 0, 196609, 327683, 0, 262145, 262147, 0, 327681, 327683, 0, 393217, 262147, 0, 458753, 262147, 0, 524289, 327683, 0, 589825, 262147, 0, 2, 262147, 0, 65538, 262147, 0, 131074, 327683, 0, 196610, 327683, 0, 262146, 262147, 0, 327682, 327683, 0, 393218, 327683, 0, 458754, 327683, 0, 524290, 262147, 0, 589826, 327683, 0, 3, 262147, 0, 65539, 327683, 0, 131075, 262147, 0, 196611, 262147, 0, 262147, 327683, 0, 327683, 327683, 0, 393219, 262147, 0, 458755, 262147, 0, 524291, 262147, 0, 589827, 262147, 0, 4, 327683, 0, 65540, 327683, 0, 131076, 327683, 0, 196612, 262147, 0, 262148, 262147, 0, 327684, 262147, 0, 393220, 327683, 0, 458756, 262147, 0, 524292, 262147, 0, 589828, 262147, 0, 5, 262147, 0, 65541, 327683, 0, 131077, 262147, 0, 196613, 262147, 0, 262149, 327683, 0, 327685, 327683, 0, 393221, 327683, 0, 458757, 262147, 0, 524293, 262147, 0, 589829, 262147, 0, 6, 327683, 0, 65542, 327683, 0, 131078, 262147, 0, 196614, 262147, 0, 262150, 327683, 0, 327686, 262147, 0, 393222, 262147, 0, 458758, 262147, 0, 524294, 327683, 0, 589830, 327683, 0, 7, 327683, 0, 65543, 262147, 0, 131079, 262147, 0, 196615, 327683, 0, 262151, 327683, 0, 327687, 262147, 0, 393223, 262147, 0, 458759, 262147, 0, 524295, 262147, 0, 589831, 262147, 0, 131080, 262147, 0, 196616, 262147, 0, 262152, 262147, 0, 327688, 262147, 0, 393224, 327683, 0, 458760, 327683, 0)
@@ -664,13 +664,13 @@ script = ExtResource("4_e0e4j")
 script = ExtResource("5_ab5g6")
 
 [node name="CapturableBase" parent="SCapturableBase" instance=ExtResource("5_j8ak2")]
-position = Vector2(489, 319)
-
-[node name="CapturableBase3" parent="SCapturableBase" instance=ExtResource("5_j8ak2")]
-position = Vector2(1693, 318)
+position = Vector2(489, 324)
 
 [node name="CapturableBase2" parent="SCapturableBase" instance=ExtResource("5_j8ak2")]
-position = Vector2(2911, 317)
+position = Vector2(1702, 324)
+
+[node name="CapturableBase3" parent="SCapturableBase" instance=ExtResource("5_j8ak2")]
+position = Vector2(2905, 324)
 
 [node name="AllyMapAI" parent="." instance=ExtResource("7_0xdkj")]
 team_name = 1

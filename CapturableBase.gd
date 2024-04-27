@@ -1,6 +1,6 @@
 class_name CapturableBase extends Area2D
 
-signal base_captured(new_team)
+signal base_captured()
 
 @export var neutral_color = Color(1, 1, 1)
 @export var player_color = Color(0.192157, 0.486275, 0.207843)
@@ -78,7 +78,7 @@ func get_team_with_majority() -> int:
 
 func set_team(new_team:int):
 	team.team = new_team
-	base_captured.emit(new_team)
+	base_captured.emit()
 	match new_team:
 		Team.TeamName.NEUTRAL:
 			sprite_2d.modulate = neutral_color

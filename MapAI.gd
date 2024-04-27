@@ -41,7 +41,7 @@ func initialize(_capturable_bases:Array, _respawn_points:Array, _pathfiding:Path
 	check_for_next_capturable_base()
 
 
-func handle_base_captured(_new_team:int):
+func handle_base_captured():
 	check_for_next_capturable_base()
 
 
@@ -65,7 +65,7 @@ func get_next_capturable_base():
 	return null
 
 
-func assign_next_capturable_base_to_units(base:CapturableBase):
+func assign_next_capturable_base_to_units(_base:CapturableBase):
 	for i in unit_container.get_children():
 		set_unit_ai_to_advance_to_next_base(i)
 

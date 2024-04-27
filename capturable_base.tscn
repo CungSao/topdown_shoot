@@ -23,7 +23,7 @@ shape = SubResource("RectangleShape2D_17yy7")
 [node name="Team" parent="." instance=ExtResource("3_gqm1x")]
 
 [node name="CaptureTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 2.0
 one_shot = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -21,7 +21,7 @@ func _ready():
 	current_weapon.show()
 
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	if Input.is_action_pressed("shoot"):
 		current_weapon.shoot()
 	elif Input.is_action_just_pressed("reload"):
