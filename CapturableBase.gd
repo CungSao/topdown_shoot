@@ -15,6 +15,14 @@ var team_to_capture:int = Team.TeamName.NEUTRAL
 @onready var capture_timer = $CaptureTimer
 @onready var sprite_2d = $Sprite2D
 
+@onready var player_label = $Player
+@onready var enemy_label = $Enemy
+
+
+func _ready():
+	player_label.text = "0"
+	enemy_label.text = "0"
+	
 
 func get_rand_pos_within_capture_radius() -> Vector2:
 	var extents = coll.shape.extents
@@ -32,8 +40,10 @@ func _on_body_entered(body):
 		
 		if body_team == Team.TeamName.ENEMY:
 			enemy_unit_count += 1
+			change_enemy_label()
 		elif body_team == Team.TeamName.PLAYER:
 			player_unit_count += 1
+			change_player_label()
 		
 		check_whether_base_can_be_captured()
 
@@ -44,11 +54,21 @@ func _on_body_exited(body):
 		
 		if body_team == Team.TeamName.ENEMY:
 			enemy_unit_count -= 1
+			change_enemy_label()
 		elif body_team == Team.TeamName.PLAYER:
 			player_unit_count -= 1
+			change_player_label()
 		
 		check_whether_base_can_be_captured()
-		
+
+
+func change_player_label():
+	player_label.text = str(player_unit_count)
+	
+	
+func change_enemy_label():
+	enemy_label.text = str(enemy_unit_count)
+
 
 func check_whether_base_can_be_captured():
 	var majority_team = get_team_with_majority()
